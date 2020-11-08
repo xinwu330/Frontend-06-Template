@@ -1,1 +1,2 @@
 学习笔记
+特别注意的点：由于Queue变成了自定义Sorted的Object，所以检查的时候不能是queue.length，因为会是undefined.
