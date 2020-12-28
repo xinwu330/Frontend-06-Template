@@ -1,1 +1,3 @@
 学习笔记
+
+了解了基础的Client解析HTTP request. 用状态机的方式一个字符一个字符解析，并且最后组装成Request发送给Server。
