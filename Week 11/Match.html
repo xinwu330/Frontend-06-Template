@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>match</title>
+	</head>
+	<body>
+		<div>
+			<div id="id1" class="div1">first div</div>
+		</div>
+		<div>
+			<div class="div2" id="id2">second div</div>
+		</div>
+		<script>
+            function match(selector, element) {
+                let tag = selector.match(/^[\w]+/g);
+                let id = selector.match(/(?<=#)([\w\d\-\_]+)/g);
+                let classSel = selector.match(/(?<=\.)([\w\d\-\_]+)/g);
+
+                if (tag !== null) {
+                    if (element.tagName.toLowerCase() !== tag[0]) {
+                        return false;
+                    }
+                }
+
+                if (id !== null) {
+                    let attributes = element.attributes['id'].value;
+                    let attrArr = attributes.split(' ');
+                    if (attrArr.length != 0) {
+                        for (let selector of id) {
+                            if (attrArr.indexOf(selector) === -1) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                if (classSel !== null) {
+                    let attr = element.attributes['class'].value;
+                    let attrArr = attributes.split(' ');
+                    if (attrArr.length != 0) {
+                        for (let selector of classSel) {
+                            if (attrArr.indexOf(selector) === -1) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                return true;
+            }
+
+            let isMatched1 = match("div #id1.div1", document.getElementById("id1"));
+            console.log('isMatched:', isMatched1);
+            let isMatched2 = match("div #id2.div1", document.getElementById("id2"));
+            console.log('isMatched:', isMatched2);
+		</script>
+	</body>
+</html>
